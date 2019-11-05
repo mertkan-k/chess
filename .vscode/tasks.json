@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc.exe build active file",
+            "command": "D:\\MinGW\\bin\\gcc.exe",
+            "args": [
+                "-g",
+                "${fileDirname}\\main.c",
+                "${fileDirname}\\game.c",
+                "${fileDirname}\\coornood.c",
+                "${fileDirname}\\movenood.c",
+                "-o",
+                "${fileDirname}\\bin\\main.exe"
+            ],
+            "options": {
+                "cwd": "D:\\MinGW\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+    ]
+}
