@@ -11,7 +11,7 @@ char* g_exportingFile = NULL;
 
 int main(int argc, char *argv[])
 {
-	LoadSettings("settings.txt");
+	LoadSettings("settings.txt")
 
 	if (!mainBoard)
 		return 0;
