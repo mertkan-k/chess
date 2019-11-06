@@ -792,6 +792,19 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 
 		MakeMovement(CoorToArea(board, &tempCoorPrev), CoorToArea(board, &tempCoorNew));
 	}
+	else if (area2->piece.type == PIECE_PAWN)
+	// Piyonun son kareye ulasmasý
+	{
+		if (
+			(area2->piece.owner == PLAYER_1 && coor2.y == GRID_SIZE-1)
+			||
+			(area2->piece.owner == PLAYER_2 && coor2.y == 0)
+		)
+		{
+			area2->piece.type == PIECE_QUEEN;
+		}
+	}
+	
 }
 enum BoardStates GetBoardStateForPlayer(Board* board, enum PlayerTypes player)
 /* Sadece þah çekilip çelimediðine bakýyor. */
