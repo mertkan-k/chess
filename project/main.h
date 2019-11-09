@@ -9,13 +9,13 @@
 // #define DEBUG
 
 #define println(fmt, args) ({\
-    printf(fmt,args);\
-    printf("\n");\
+	printf(fmt,args);\
+	printf("\n");\
 })
 
 #ifdef DEBUG
 #define printTEST(fmt, args) ({\
-        println(fmt,args);\
+		println(fmt,args);\
 })
 #else
 #define printTEST(fmt, args)
@@ -23,14 +23,14 @@
 
 enum SettingTypes
 {
-    SETTING_TEST,
-    SETTING_EXPORTING,
-    SETTING_LOAD_FILE,
-    SETTING_MAKE_FILE,
-    SETTING_PRINT_AVAIBLE_PIECES,
-    SETTING_PRINT_AVAIBLE_MOVE,
-    SETTING_AUTO_PLAY_1_MOMENT,
-    SETTING_MAX,
+	SETTING_TEST,
+	SETTING_EXPORTING,
+	SETTING_LOAD_FILE,
+	SETTING_MAKE_FILE,
+	SETTING_PRINT_AVAIBLE_PIECES,
+	SETTING_PRINT_AVAIBLE_MOVE,
+	SETTING_AUTO_PLAY_1_MOMENT,
+	SETTING_MAX,
 };
 
 extern bool g_TESTMODE;

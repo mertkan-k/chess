@@ -11,48 +11,48 @@
 
 enum PieceTypes
 {
-    PIECE_EMPTY,
-    PIECE_PAWN,
-    PIECE_ROCK,
-    PIECE_KNIGHT,
-    PIECE_BISHOP,
-    PIECE_QUEEN,
-    PIECE_KING,
+	PIECE_EMPTY,
+	PIECE_PAWN,
+	PIECE_ROCK,
+	PIECE_KNIGHT,
+	PIECE_BISHOP,
+	PIECE_QUEEN,
+	PIECE_KING,
 };
 
 enum PlayerTypes
 {
-    PLAYER_NONE,
-    PLAYER_1, // alttaki 1
-    PLAYER_2,
+	PLAYER_NONE,
+	PLAYER_1, // alttaki 1
+	PLAYER_2,
 };
 
 typedef struct Piece
 {
-    enum PieceTypes type;
-    enum PlayerTypes owner;
-    bool isMoved;
+	enum PieceTypes type;
+	enum PlayerTypes owner;
+	bool isMoved;
 } Piece;
 
 typedef struct Coor
 {
-    int x, y;
+	int x, y;
 } Coor;
 
 typedef struct Area
 {
-    Coor coor;
-    Piece piece;
+	Coor coor;
+	Piece piece;
 } Area;
 
 typedef struct Board
 {
-    Area board[GRID_SIZE][GRID_SIZE];
+	Area board[GRID_SIZE][GRID_SIZE];
 } Board;
 
 typedef struct Players
 {
-    enum PlayerTypes players[PLAYER_COUNT];
+	enum PlayerTypes players[PLAYER_COUNT];
 } Players;
 
 
@@ -61,34 +61,34 @@ typedef struct Players
  */
 typedef struct Player
 {
-    enum PlayerTypes type;
-    Piece* pieces[16];
+	enum PlayerTypes type;
+	Piece* pieces[16];
 } Player;
 
 enum MoveTypes
 {
-    MOVE_NONE,
-    MOVE_R,
-    MOVE_L,
-    MOVE_U,
-    MOVE_D,
-    MOVE_RU,
-    MOVE_RD,
-    MOVE_LU,
-    MOVE_LD,
-    MOVE_SPECIAL, // At Hareketi
+	MOVE_NONE,
+	MOVE_R,
+	MOVE_L,
+	MOVE_U,
+	MOVE_D,
+	MOVE_RU,
+	MOVE_RD,
+	MOVE_LU,
+	MOVE_LD,
+	MOVE_SPECIAL, // At Hareketi
 };
 
 enum SpecialMove
 {
-    SPECIAL_MOVE_0, // x2 y1
-    SPECIAL_MOVE_1, // 
-    SPECIAL_MOVE_2, // 
-    SPECIAL_MOVE_3, // 
-    SPECIAL_MOVE_4, // 
-    SPECIAL_MOVE_5, // 
-    SPECIAL_MOVE_6, // 
-    SPECIAL_MOVE_7, // 
+	SPECIAL_MOVE_0, // x2 y1
+	SPECIAL_MOVE_1, // 
+	SPECIAL_MOVE_2, // 
+	SPECIAL_MOVE_3, // 
+	SPECIAL_MOVE_4, // 
+	SPECIAL_MOVE_5, // 
+	SPECIAL_MOVE_6, // 
+	SPECIAL_MOVE_7, // 
 };
 
 typedef struct CoorNood
@@ -99,32 +99,32 @@ typedef struct CoorNood
 
 typedef struct MoveNood
 {
-    Coor coor;
-    CoorNood* data;
-    struct MoveNood* next;
+	Coor coor;
+	CoorNood* data;
+	struct MoveNood* next;
 } MoveNood;
 
 enum MoveReturn
 {
-    SAME_COOR, // Ayný koordinatlar
-    NOT_VALID_COOR, // Geçersiz koordinatlar
-    NOT_OWNER, // Kendi taþý deðil
-    ALREADY_OWNER, // Gittiði yerde kendi taþý var
-    MOVE_BLOCKED, // Arada taþ var
-    SAH_TEHDIT_ALTINDA,
-    GECERSIZ_HAMLE_TIPI,
-    SUCCES, // Arada taþ var
+	SAME_COOR, // Ayný koordinatlar
+	NOT_VALID_COOR, // Geçersiz koordinatlar
+	NOT_OWNER, // Kendi taþý deðil
+	ALREADY_OWNER, // Gittiði yerde kendi taþý var
+	MOVE_BLOCKED, // Arada taþ var
+	SAH_TEHDIT_ALTINDA,
+	GECERSIZ_HAMLE_TIPI,
+	SUCCES,
 };
 
 enum BoardStates
 {
-    STATE_NORMAL,
-    STATE_CHECK,
-    CHECK_BY_PLAYER_1,
-    MATE_BY_PLAYER_1,
-    CHECK_BY_PLAYER_2,
-    MATE_BY_PLAYER_2,
-    STATE_UNKNOWN = 99,
+	STATE_NORMAL,
+	STATE_CHECK,
+	CHECK_BY_PLAYER_1,
+	MATE_BY_PLAYER_1,
+	CHECK_BY_PLAYER_2,
+	MATE_BY_PLAYER_2,
+	STATE_UNKNOWN = 99,
 };
 
 /* Board */

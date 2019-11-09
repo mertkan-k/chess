@@ -120,5 +120,4 @@ void ClearNood(CoorNood* headNood)
 		tempNood = tempNood->next;
 		free(deletingNood);
 	}
-	free(headNood);
 }

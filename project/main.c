@@ -20,31 +20,31 @@ int main(int argc, char *argv[])
 	{
 		/***
 		 ** Nood pointerleri tutuan
-		 **    farklý bir nood tipi oluþturalým.
-		 **    /*
-		 **    Coor --- Hareket bilgileri tutulan taþýn coordinatlarý
-		 **    NoodP -- Hareket bilgileri bulunan Nood Head'ý
-		 **    Next --- Sonrakinin pointeri
+		 **	farklý bir nood tipi oluþturalým.
+		 **	/*
+		 **	Coor --- Hareket bilgileri tutulan taþýn coordinatlarý
+		 **	NoodP -- Hareket bilgileri bulunan Nood Head'ý
+		 **	Next --- Sonrakinin pointeri
 		 ** Tahta üzerinde kendimize ait bir taþ olana kadar tarayalým.
 		 ** Her bir taþýmýz için:
-		 **    Yapýlabilecek hamleleri alalým (control = true)
-		 **    Eðer hamle sayýsý 0 dan büyükse bu listeyi nood'a ekleyelim.
+		 **	Yapýlabilecek hamleleri alalým (control = true)
+		 **	Eðer hamle sayýsý 0 dan büyükse bu listeyi nood'a ekleyelim.
 		 ** Eðer nood'un büyüklüðü 0 ise mat olmuþ oluyoruz.
 		 ** Diðer türlü kullanýcýdan satranct tipi koordinat alýp
-		 **    kullanabileceðimiz Coor tipine dönüþtürelim.
+		 **	kullanabileceðimiz Coor tipine dönüþtürelim.
 		 * Nood üzerinden verilen coor'u bulup hareket listesini alalým.
-		 **    Eðer listede yoksa
-		 **       Hamle yapýlamayacaðýný söylesin
-		 **       continue;
+		 **	Eðer listede yoksa
+		 **	   Hamle yapýlamayacaðýný söylesin
+		 **	   continue;
 		 * Hareket listesini satranct tipi koor'a dönüþtürüp ekrana bastýralým.
 		 * Kullanýcýdan satranc tipi koor isteyelim.
 		 * Seçilen taþý deðiþtirme seçeneði de ekleyelim.
 		 * Bu koordinatý kendi tipimize çevirelim.
-		 *    Eðer listemizde bu koordinat var ise:
-		 *       Hareketi gerçekleþtirip, sýrayý devredelim.
-		 *    Yoksa:
-		 *       Tekrar aynýsýný isteyelim.
-		 *       (Sonuçta hareket ettirmek istediði taþý deðiþtirmesi için bir seçenek ekleyeceðiz.)
+		 *	Eðer listemizde bu koordinat var ise:
+		 *	   Hareketi gerçekleþtirip, sýrayý devredelim.
+		 *	Yoksa:
+		 *	   Tekrar aynýsýný isteyelim.
+		 *	   (Sonuçta hareket ettirmek istediði taþý deðiþtirmesi için bir seçenek ekleyeceðiz.)
 		 * 
 		 */
 
@@ -142,10 +142,8 @@ enum SettingTypes GetSettingType(const char* buf)
 	};
 
 	for (size_t i = 0; i < SETTING_MAX; i++)
-	{
 		if (strcmp(settingArray[i], buf) == 0)
 			return i;
-	}
 
 	return SETTING_MAX;
 }

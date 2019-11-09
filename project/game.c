@@ -67,7 +67,7 @@ void PrintBoard(Board* board)
 	Area tempArea;
 	for (int j=GRID_SIZE-1; j > -1; j--)
 	{
-		printf("(%d)    ", (j+1));
+		printf("(%d)	", (j+1));
 		for (int i=0; i < GRID_SIZE; i++)
 		{
 			tempArea = board->board[i][j];
@@ -77,7 +77,7 @@ void PrintBoard(Board* board)
 		}
 		printf("\n\n\n");
 	}
-	printf("\n       (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)\n\n\n\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
+	printf("\n	   (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)\n\n\n\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
 }
 bool IsReelCoor(Coor* coor)
 {
@@ -90,6 +90,7 @@ Area* CoorToArea(Board* board, Coor* coor)
 bool UserInputToCoor(char* userInput, Coor* coor)
 {
 	// Doðrudan ascii tablosundan da yapýlabilir.
+	// 00 is special
 	switch (userInput[0])
 	{
 		case 'a':
@@ -796,9 +797,9 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 	// Piyonun son kareye ulasmasý
 	{
 		if (
-			(area2->piece.owner == PLAYER_1 && coor2.y == GRID_SIZE-1)
+			(area2->piece.owner == PLAYER_1 && coor2->y == GRID_SIZE-1)
 			||
-			(area2->piece.owner == PLAYER_2 && coor2.y == 0)
+			(area2->piece.owner == PLAYER_2 && coor2->y == 0)
 		)
 		{
 			area2->piece.type == PIECE_QUEEN;
@@ -925,7 +926,7 @@ void GetValidArea(MoveNood* allMovements, Area** area, CoorNood** moveList)
 
 		if (g_PRINTMOVES)
 		{ // Printing.. // Fonksiyon pointer bilseydim burasý gibi yerler çok daha iyi olabilirdi.
-			printf("\n\n        Oynanabilecek Taslar:\n            ");
+			printf("\n\n		Oynanabilecek Taslar:\n			");
 			size_t noodLen = GetMoveNoodSize(allMovements);
 			for (int i=0; i<noodLen; i++)
 			{
@@ -969,9 +970,9 @@ bool GetValidMovement(CoorNood* coorNood, Area** area)
 	/***
 	 * Kendisine gelen listeyi satranc tipi coor a dönüþtürüp ekrana bastýrýyouzr.
 	 * Kullanýcýdan bunlardan birisini girmesini itiyoruz.
-	 *    Ve taþý deðiþtirmesi için de bir seçeneke veriyoruz.
-	 *    Eðer bu seçeneði seçerse false döndürüyoruz.
-	 *    Else return true
+	 *	Ve taþý deðiþtirmesi için de bir seçeneke veriyoruz.
+	 *	Eðer bu seçeneði seçerse false döndürüyoruz.
+	 *	Else return true
 	 * Daha sonra bu girdiðini area'ya atýyoruz.
 	 */
 
@@ -988,7 +989,7 @@ bool GetValidMovement(CoorNood* coorNood, Area** area)
 
 		if (g_PRINTPIECES)
 		{ // Printing.. // Fonksiyon pointer bilseydim burasý gibi yerler çok daha iyi olabilirdi.
-			printf("\n\n        Yapilabilecek Hamleler:\n            ");
+			printf("\n\n		Yapilabilecek Hamleler:\n			");
 			for (int i=0; i<noodLen; i++)
 			{
 				Coor tempCoor = NoodGetValueByIndex(coorNood, i);

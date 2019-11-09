@@ -4,7 +4,7 @@
         {
             "type": "shell",
             "label": "gcc.exe build active file",
-            "command": "D:\\MinGW\\bin\\gcc.exe",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
             "args": [
                 "-g",
                 "${fileDirname}\\main.c",
