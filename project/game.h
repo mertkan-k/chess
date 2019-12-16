@@ -92,18 +92,6 @@ typedef struct MoveNood
 	struct MoveNood* next;
 } MoveNood;
 
-enum MoveReturn
-{
-	SAME_COOR, // Ayný koordinatlar
-	NOT_VALID_COOR, // Geçersiz koordinatlar
-	NOT_OWNER, // Kendi taþý deðil
-	ALREADY_OWNER, // Gittiði yerde kendi taþý var
-	MOVE_BLOCKED, // Arada taþ var
-	SAH_TEHDIT_ALTINDA,
-	GECERSIZ_HAMLE_TIPI,
-	SUCCES,
-};
-
 enum BoardStates
 {
 	STATE_NORMAL,
