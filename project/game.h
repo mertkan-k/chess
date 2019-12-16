@@ -55,16 +55,6 @@ typedef struct Players
 	enum PlayerTypes players[PLAYER_COUNT];
 } Players;
 
-
-/**
- * Ileriki versiyonlarda bu sisteme gecis yapilabilir.
- */
-typedef struct Player
-{
-	enum PlayerTypes type;
-	Piece* pieces[16];
-} Player;
-
 enum MoveTypes
 {
 	MOVE_NONE,
