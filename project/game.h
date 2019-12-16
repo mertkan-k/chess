@@ -9,8 +9,6 @@
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
-typedef char BYTE;
-
 enum PieceTypes
 {
 	PIECE_EMPTY,
@@ -38,7 +36,7 @@ typedef struct Piece
 
 typedef struct Coor
 {
-	BYTE x, y;
+	int x, y;
 } Coor;
 
 typedef struct Area

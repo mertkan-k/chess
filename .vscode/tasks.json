@@ -15,7 +15,7 @@
                 "${fileDirname}\\bin\\main.exe"
             ],
             "options": {
-                "cwd": "D:\\MinGW\\bin"
+                "cwd": "C:\\MinGW\\bin"
             },
             "problemMatcher": [
                 "$gcc"

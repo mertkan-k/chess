@@ -77,7 +77,7 @@ void PrintBoard(Board* board)
 		}
 		printf("\n\n\n");
 	}
-	printf("\n	   (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)\n\n\n\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
+	printf("\n	(%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)\n\n\n\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
 }
 bool IsReelCoor(Coor* coor)
 {
@@ -93,77 +93,31 @@ bool UserInputToCoor(char* userInput, Coor* coor)
 	// 00 is special
 	switch (userInput[0])
 	{
-		case 'a':
-		case 'A':
-			coor->x = 0;
-			break;
-		case 'b':
-		case 'B':
-			coor->x = 1;
-			break;
-		case 'c':
-		case 'C':
-			coor->x = 2;
-			break;
-		case 'd':
-		case 'D':
-			coor->x = 3;
-			break;
-		case 'e':
-		case 'E':
-			coor->x = 4;
-			break;
-		case 'f':
-		case 'F':
-			coor->x = 5;
-			break;
-		case 'g':
-		case 'G':
-			coor->x = 6;
-			break;
-		case 'h':
-		case 'H':
-			coor->x = 7;
-			break;
-		case '0':
-			coor->x = GRID_SIZE;
-			break;
+		case 'a': case 'A': coor->x = 0; break;
+		case 'b': case 'B': coor->x = 1; break;
+		case 'c': case 'C': coor->x = 2; break;
+		case 'd': case 'D': coor->x = 3; break;
+		case 'e': case 'E': coor->x = 4; break;
+		case 'f': case 'F': coor->x = 5; break;
+		case 'g': case 'G': coor->x = 6; break;
+		case 'h': case 'H': coor->x = 7; break;
+		case '0': coor->x = GRID_SIZE; break;
 		
-		default:
-			return false;
+		default: return false;
 	}
 	switch (userInput[1])
 	{
-		case '1':
-			coor->y = 0;
-			break;
-		case '2':
-			coor->y = 1;
-			break;
-		case '3':
-			coor->y = 2;
-			break;
-		case '4':
-			coor->y = 3;
-			break;
-		case '5':
-			coor->y = 4;
-			break;
-		case '6':
-			coor->y = 5;
-			break;
-		case '7':
-			coor->y = 6;
-			break;
-		case '8':
-			coor->y = 7;
-			break;
-		case '0':
-			coor->y = GRID_SIZE;
-			break;
+		case '1': coor->y = 0; break;
+		case '2': coor->y = 1; break;
+		case '3': coor->y = 2; break;
+		case '4': coor->y = 3; break;
+		case '5': coor->y = 4; break;
+		case '6': coor->y = 5; break;
+		case '7': coor->y = 6; break;
+		case '8': coor->y = 7; break;
+		case '0': coor->y = GRID_SIZE; break;
 		
-		default:
-			return false;
+		default: return false;
 	}
 
 	return true;
@@ -172,63 +126,30 @@ void CoorToUserInput(char* userInput, Coor* coor)
 {
 	switch (coor->x)
 	{
-		case 0:
-			userInput[0] = 'a';
-			break;
-		case 1:
-			userInput[0] = 'b';
-			break;
-		case 2:
-			userInput[0] = 'c';
-			break;
-		case 3:
-			userInput[0] = 'd';
-			break;
-		case 4:
-			userInput[0] = 'e';
-			break;
-		case 5:
-			userInput[0] = 'f';
-			break;
-		case 6:
-			userInput[0] = 'g';
-			break;
-		case 7:
-			userInput[0] = 'h';
-			break;
+		case 0: userInput[0] = 'a'; break;
+		case 1: userInput[0] = 'b'; break;
+		case 2: userInput[0] = 'c'; break;
+		case 3: userInput[0] = 'd'; break;
+		case 4: userInput[0] = 'e'; break;
+		case 5: userInput[0] = 'f'; break;
+		case 6: userInput[0] = 'g'; break;
+		case 7: userInput[0] = 'h'; break;
 		
 		default:
 			break;
 	}
 	switch (coor->y)
 	{
-		case 0:
-			userInput[1] = '1';
-			break;
-		case 1:
-			userInput[1] = '2';
-			break;
-		case 2:
-			userInput[1] = '3';
-			break;
-		case 3:
-			userInput[1] = '4';
-			break;
-		case 4:
-			userInput[1] = '5';
-			break;
-		case 5:
-			userInput[1] = '6';
-			break;
-		case 6:
-			userInput[1] = '7';
-			break;
-		case 7:
-			userInput[1] = '8';
-			break;
+		case 0: userInput[1] = '1'; break;
+		case 1: userInput[1] = '2'; break;
+		case 2: userInput[1] = '3'; break;
+		case 3: userInput[1] = '4'; break;
+		case 4: userInput[1] = '5'; break;
+		case 5: userInput[1] = '6'; break;
+		case 6: userInput[1] = '7'; break;
+		case 7: userInput[1] = '8'; break;
 		
-		default:
-			break;
+		default: break;
 	}
 }
 void MakeBoardMovements(const char* line, Board* mainBoard)
@@ -286,17 +207,11 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				Coor addCoor = area->coor;
 				int max;
 				if (area->piece.owner == PLAYER_1)
-				{
 					addCoor.y += 1;
-					max = GetMaxMoveLen(board, &(area->coor), MOVE_U);
-				}
 				else
-				{
 					addCoor.y -= 1;
-					max = GetMaxMoveLen(board, &(area->coor), MOVE_D);
-				}
 
-				if (max >= 1)
+				if (CoorToArea(board, &addCoor)->piece.owner == PLAYER_NONE)
 				{
 					if (withControl)
 					{
@@ -1039,41 +954,21 @@ void GetPieceName(Piece* piece, char* name)
 	{
 		default:
 			printTEST("Unknown piece owner type %d", piece->owner);
-		case PLAYER_NONE:
-			name[0] = '*';
-			break;
-		case PLAYER_1:
-			name[0] = '1';
-			break;
-		case PLAYER_2:
-			name[0] = '2';
-			break;
+		case PLAYER_NONE: name[0] = '*'; break;
+		case PLAYER_1: name[0] = '1'; break;
+		case PLAYER_2: name[0] = '2'; break;
 	}
 	switch (piece->type)
 	{
 		default:
 			printTEST("Unknown piece type %d", piece->type);
-		case PIECE_EMPTY:
-			name[1] = '*';
-			break;
-		case PIECE_PAWN:
-			name[1] = 'P';
-			break;
-		case PIECE_ROCK:
-			name[1] = 'K';
-			break;
-		case PIECE_KNIGHT:
-			name[1] = 'A';
-			break;
-		case PIECE_BISHOP:
-			name[1] = 'F';
-			break;
-		case PIECE_QUEEN:
-			name[1] = 'V';
-			break;
-		case PIECE_KING:
-			name[1] = 'S';
-			break;
+		case PIECE_EMPTY:	name[1] = '*'; break;
+		case PIECE_PAWN:	name[1] = 'P'; break;
+		case PIECE_ROCK:	name[1] = 'K'; break;
+		case PIECE_KNIGHT:	name[1] = 'A'; break;
+		case PIECE_BISHOP:	name[1] = 'F'; break;
+		case PIECE_QUEEN:	name[1] = 'V'; break;
+		case PIECE_KING:	name[1] = 'S'; break;
 	}
 }
 bool IsDefaultPos(Area* area)
