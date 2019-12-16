@@ -59,6 +59,7 @@ typedef struct Players
 {
 	enum PlayerTypes currentPlayer;
 	TremainTime remainTimes[PLAYER_COUNT]; /* { {remainMin, remainSec}, {...} } */
+	Coor lastMove[PLAYER_COUNT];
 } Players;
 
 enum MoveTypes

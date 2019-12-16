@@ -687,6 +687,8 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 
 	MakeMovement(area1, area2);
 
+	players.lastMove[(area1->piece.owner)-1] = *coor2;
+
 	if (area2->piece.type == PIECE_KING && GetCoorDistance(&(area1->coor), &(area2->coor)) > 0)
 	// Rok ise:
 	{

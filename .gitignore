@@ -38,5 +38,6 @@ Thumbs.db
 
 
 #
+*.txt
 project/forDeveloper
 project/bin
