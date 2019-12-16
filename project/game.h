@@ -79,18 +79,6 @@ enum MoveTypes
 	MOVE_SPECIAL, // At Hareketi
 };
 
-enum SpecialMove
-{
-	SPECIAL_MOVE_0, // x2 y1
-	SPECIAL_MOVE_1, // 
-	SPECIAL_MOVE_2, // 
-	SPECIAL_MOVE_3, // 
-	SPECIAL_MOVE_4, // 
-	SPECIAL_MOVE_5, // 
-	SPECIAL_MOVE_6, // 
-	SPECIAL_MOVE_7, // 
-};
-
 typedef struct CoorNood
 {
 	Coor data;
