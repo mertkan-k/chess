@@ -50,9 +50,15 @@ typedef struct Board
 	Area board[GRID_SIZE][GRID_SIZE];
 } Board;
 
+typedef struct remainTime
+{
+	int minute, second;
+} TremainTime;
+
 typedef struct Players
 {
-	enum PlayerTypes players[PLAYER_COUNT];
+	enum PlayerTypes currentPlayer;
+	TremainTime remainTimes[PLAYER_COUNT]; /* { {remainMin, remainSec}, {...} } */
 } Players;
 
 enum MoveTypes
@@ -141,7 +147,7 @@ Coor* MoveNoodGetCoorByIndex(MoveNood* headCont, size_t index);
 void ClearMoveNood(MoveNood* headNood);
 CoorNood* FindCoorNoodByCoor(MoveNood* headNoodP, Coor coor);
 
-extern enum PlayerTypes currentPlayer;
+extern Players players;
 extern Board* mainBoard;
 
 #endif

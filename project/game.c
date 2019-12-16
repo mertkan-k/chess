@@ -790,13 +790,13 @@ bool IsMyArea(enum PlayerTypes player, Area* area)
 }
 void ChangePlayer()
 {
-	switch (currentPlayer)
+	switch (players.currentPlayer)
 	{
 	case PLAYER_1:
-		currentPlayer = PLAYER_2;
+		players.currentPlayer = PLAYER_2;
 		break;
 	case PLAYER_2:
-		currentPlayer = PLAYER_1;
+		players.currentPlayer = PLAYER_1;
 		break;
 	
 	default:
@@ -861,7 +861,7 @@ void GetValidArea(MoveNood* allMovements, Area** area, CoorNood** moveList)
 		}
 
 		tempArea1 = CoorToArea(mainBoard, &userCoor);
-		if (tempArea1->piece.owner != currentPlayer)
+		if (tempArea1->piece.owner != players.currentPlayer)
 		{
 			printf("Bu tasi oynayamazsiniz.\n");
 			continue;

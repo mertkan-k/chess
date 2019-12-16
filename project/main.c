@@ -1,7 +1,7 @@
 #include "main.h"
 #include "game.h"
 
-enum PlayerTypes currentPlayer = PLAYER_1;
+Players players;
 Board* mainBoard = NULL;
 bool g_TESTMODE = false;
 bool g_PRINTPIECES = false;
@@ -11,6 +11,9 @@ char* g_exportingFile = NULL;
 
 int main(int argc, char *argv[])
 {
+	players.currentPlayer = PLAYER_1;
+	memset(players.remainTimes, 0, sizeof(TremainTime));
+
 	LoadSettings("settings.txt");
 
 	if (!mainBoard)
@@ -50,7 +53,7 @@ int main(int argc, char *argv[])
 
 		Coor tempCoor; tempCoor.x = -1; tempCoor.y = -1;
 		MoveNood* moveList = CreateMoveNood(tempCoor);
-		PlayerGetAllMovements(mainBoard, currentPlayer, moveList);
+		PlayerGetAllMovements(mainBoard, players.currentPlayer, moveList);
 
 		if (GetMoveNoodSize(moveList) <= 0)
 		{
@@ -123,6 +126,16 @@ void LoadSettings(const char* fileName)
 			case SETTING_AUTO_PLAY_1_MOMENT:
 				fscanf(fptr, "%d\n", &g_AUTOPLAY);
 				break;
+			case SETTING_REMAIN_TIME:
+				{
+				TremainTime tempTime;
+				fscanf(fptr, "%d %d\n", &tempTime.minute, &tempTime.second);
+
+				for (size_t i = 0; i < (sizeof(players.remainTimes)/sizeof(players.remainTimes[0])); i++)
+					players.remainTimes[i] = tempTime;
+
+				break;
+				}
 			default:
 				break;
 		}
