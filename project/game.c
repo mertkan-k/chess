@@ -6,7 +6,7 @@ void ClearBoard(Board* board)
 	Area tempArea;
 	tempArea.piece.type = PIECE_EMPTY;
 	tempArea.piece.owner = PLAYER_NONE;
-	tempArea.piece.isMoved = false;
+	tempArea.piece.moveCount = 0;
 	for (int i=0; i < GRID_SIZE; i++)
 	{
 		for (int j=0; j < GRID_SIZE; j++)
@@ -30,7 +30,7 @@ bool CreateBoard(const char* fileName, Board** board)
 		return false;
 
 	Area tempArea;
-	tempArea.piece.isMoved = false;
+	tempArea.piece.moveCount = 0;
 
 	char line[7+1];
 	int i = 1;
@@ -176,7 +176,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 		case PIECE_PAWN:
 		{
 			/* Ýki birim ilerleme */
-			if (IsDefaultPos)
+			if (IsDefaultPos(area))
 			{
 				Coor addCoor = area->coor;
 				int max;
@@ -223,89 +223,103 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				}
 			}
 			/* Saldýrý Hamleleri */
-			switch (area->piece.owner)
 			{
-				case PLAYER_1:
+				Coor tempCoors[2];
+				switch (area->piece.owner)
 				{
-					/* Sað üste saldýrý */
+					case PLAYER_1:
 					{
-						Coor tempCoor;
-						tempCoor.x = (area->coor.x)+1; tempCoor.y = (area->coor.y)+1;
-
-						if (IsReelCoor(&tempCoor))
-							if (IsEnemyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
-							{
-								if (withControl)
-								{
-									if (ControlMovement(board, area, CoorToArea(board, &tempCoor), area->piece.owner))
-										AddNood(list, tempCoor);
-								}
-								else
-									AddNood(list, tempCoor);
-							}
+						/* Sað üste saldýrý */
+						tempCoors[0].x = (area->coor.x)+1; tempCoors[0].y = (area->coor.y)+1;
+						/* Sol üste saldýrý */
+						tempCoors[1].x = (area->coor.x)-1; tempCoors[1].y = (area->coor.y)+1;
+						break;
 					}
-					/* Sol üste saldýrý */
+					case PLAYER_2:
 					{
-						Coor tempCoor;
-						tempCoor.x = (area->coor.x)-1; tempCoor.y = (area->coor.y)+1;
-
-						if (IsReelCoor(&tempCoor))
-							if (IsEnemyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
-							{
-								if (withControl)
-								{
-									if (ControlMovement(board, area, CoorToArea(board, &tempCoor), area->piece.owner))
-										AddNood(list, tempCoor);
-								}
-								else
-									AddNood(list, tempCoor);
-							}
+						/* Sað alta saldýrý */
+						tempCoors[0].x = (area->coor.x)+1; tempCoors[0].y = (area->coor.y)-1;
+						/* Sol alta saldýrý */
+						tempCoors[1].x = (area->coor.x)-1; tempCoors[1].y = (area->coor.y)-1;
+						break;
 					}
-					break;
+				
+					default:
+					{
+						printTEST("Unknow owner type (%d)", area->piece.owner);
+						break;
+					}
 				}
-				case PLAYER_2:
+				FOR_ARRAY(tempCoors)
 				{
-					/* Sað alta saldýrý */
+					Coor tempCoor = tempCoors[i];
+					if (IsReelCoor(&tempCoor))
 					{
-						Coor tempCoor;
-						tempCoor.x = (area->coor.x)+1; tempCoor.y = (area->coor.y)-1;
-
-						if (IsReelCoor(&tempCoor))
-							if (IsEnemyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
+						if (IsEnemyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
+						{
+							if (withControl)
 							{
-								if (withControl)
-								{
-									if (ControlMovement(board, area, CoorToArea(board, &tempCoor), area->piece.owner))
-										AddNood(list, tempCoor);
-								}
-								else
+								if (ControlMovement(board, area, CoorToArea(board, &tempCoor), area->piece.owner))
 									AddNood(list, tempCoor);
 							}
-					}
-					/* Sol alta saldýrý */
-					{
-						Coor tempCoor;
-						tempCoor.x = (area->coor.x)-1; tempCoor.y = (area->coor.y)-1;
-
-						if (IsReelCoor(&tempCoor))
-							if (IsEnemyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
+							else
+								AddNood(list, tempCoor);
+						}
+						else if(!IsMyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
+						{
+							Coor nearCoor;
+							nearCoor.x = tempCoor.x;
+							bool canAttack = true;
+							switch (area->piece.owner)
 							{
-								if (withControl)
+								case PLAYER_1:
 								{
-									if (ControlMovement(board, area, CoorToArea(board, &tempCoor), area->piece.owner))
-										AddNood(list, tempCoor);
+									if (area->coor.y != 4)
+									{
+										canAttack = false;
+										break;
+									}
+									nearCoor.y = tempCoor.y-1;
+									break;
 								}
-								else
+								case PLAYER_2:
+								{
+									if (area->coor.y != 2)
+									{
+										canAttack = false;
+										break;
+									}
+									nearCoor.y = tempCoor.y+1;
+									break;
+								}
+								default:
+								{
+									canAttack = false;
+									break;
+								}
+							}
+
+							if (!canAttack)
+								continue;
+
+							// Piyonun sadece bir kere oynanmis oynanmis olmasi gerek.
+							if (CoorToArea(board, &nearCoor)->piece.moveCount != 1)
+								continue;
+
+							// Piyon, en son oynanan tas olmali
+							Coor lastCoor = players.lastMove[(CoorToArea(board, &nearCoor)->piece.owner)-1];
+							if (nearCoor.x != lastCoor.x || nearCoor.y != lastCoor.y)
+								continue;
+
+							if (withControl)
+							{
+								if (ControlMovement(board, area, CoorToArea(board, &tempCoor), area->piece.owner))
 									AddNood(list, tempCoor);
 							}
+							else
+								AddNood(list, tempCoor);
+						}
 					}
-					break;
-				}
-			
-				default:
-				{
-					printTEST("Unknow owner type (%d)", area->piece.owner);
-					break;
 				}
 			}
 			break;
@@ -523,7 +537,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				 ** Sah ve kale arasýnda tas olmayacak
 				 */
 
-				if (area->piece.isMoved)
+				if (area->piece.moveCount != 0)
 					break;
 
 				if (GetBoardStateForPlayer(board, area->piece.owner) != STATE_NORMAL)
@@ -553,7 +567,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 					if (tempArea->piece.type != PIECE_ROCK)
 						continue;
 
-					if (tempArea->piece.isMoved)
+					if (tempArea->piece.moveCount != 0)
 						continue;
 
 					enum MoveTypes moveType;
@@ -570,7 +584,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 
 					Coor iiPrevCoor = area->coor;
 					Board tempBoard = *board;
-					Area *area1, *area2;
+					Coor iiLastCoor = iiPrevCoor;
 
 					bool ret = true;
 
@@ -582,16 +596,12 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 						 * Sah her zaman 2 birim ilerliyor.
 						 */
 
-						area1 = CoorToArea(&tempBoard, &iiPrevCoor);
-
 						if (moveType == MOVE_L)
-							iiPrevCoor.x -= 1;
+							iiLastCoor.x -= 1;
 						else
-							iiPrevCoor.x += 1;
+							iiLastCoor.x += 1;
 
-						area2 = CoorToArea(&tempBoard, &iiPrevCoor);
-
-						MakeMovement(area1, area2);
+						MakeMovementBoard(&tempBoard, &iiPrevCoor, &iiLastCoor);
 
 						if (GetBoardStateForPlayer(&tempBoard, area->piece.owner) != STATE_NORMAL)
 						{
@@ -603,7 +613,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 					if (!ret)
 						continue;
 
-					AddNood(list, area2->coor);
+					AddNood(list, iiLastCoor);
 
 				}
 				
@@ -671,12 +681,12 @@ void MakeMovement(Area* area1, Area* area2)
 	#endif
 	}
 
-	area1->piece.isMoved = true;
+	area1->piece.moveCount++;
 
 	Piece emptyPiece;
 	emptyPiece.type = PIECE_EMPTY;
 	emptyPiece.owner = PLAYER_NONE;
-	emptyPiece.isMoved = false;
+	emptyPiece.moveCount = 0;
 
 	area2->piece = area1->piece;
 	area1->piece = emptyPiece;
@@ -684,10 +694,12 @@ void MakeMovement(Area* area1, Area* area2)
 void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 {
 	Area *area1 = CoorToArea(board, coor1), *area2 = CoorToArea(board, coor2);
+	if (area1 == &(mainBoard->board[area1->coor.x][area1->coor.y]))
+	{
+		players.lastMove[(area1->piece.owner)-1] = *coor2;
+	}
 
 	MakeMovement(area1, area2);
-
-	players.lastMove[(area1->piece.owner)-1] = *coor2;
 
 	if (area2->piece.type == PIECE_KING && GetCoorDistance(&(area1->coor), &(area2->coor)) > 0)
 	// Rok ise:
@@ -721,6 +733,10 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 		{
 			area2->piece.type == PIECE_QUEEN;
 		}
+		/*else if ()
+		{
+
+		}*/
 	}
 	
 }

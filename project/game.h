@@ -31,7 +31,7 @@ typedef struct Piece
 {
 	enum PieceTypes type;
 	enum PlayerTypes owner;
-	bool isMoved;
+	int moveCount;
 } Piece;
 
 typedef struct Coor

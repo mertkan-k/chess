@@ -21,6 +21,10 @@
 #define printTEST(fmt, args)
 #endif
 
+#define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]))
+
+#define FOR_ARRAY(a) for (int i=0; i<ARRAY_SIZE(a); i++)
+
 enum SettingTypes
 {
 	SETTING_TEST,

@@ -131,7 +131,7 @@ void LoadSettings(const char* fileName)
 				TremainTime tempTime;
 				fscanf(fptr, "%d %d\n", &tempTime.minute, &tempTime.second);
 
-				for (size_t i = 0; i < (sizeof(players.remainTimes)/sizeof(players.remainTimes[0])); i++)
+				FOR_ARRAY(players.remainTimes)
 					players.remainTimes[i] = tempTime;
 
 				break;
