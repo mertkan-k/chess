@@ -284,7 +284,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 								}
 								case PLAYER_2:
 								{
-									if (area->coor.y != 2)
+									if (area->coor.y != 3)
 									{
 										canAttack = false;
 										break;
@@ -699,6 +699,23 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 		players.lastMove[(area1->piece.owner)-1] = *coor2;
 	}
 
+	if (area2->piece.type == PIECE_EMPTY && area1->coor.x != area2->coor.x)
+	/**
+	 * En passant:
+	 * eger gidecegi yer bossa ve x degeri kendi x ine esit degilse:
+	*/
+	{
+		/**
+		 * yandaki tasi bul ve kaldir.
+		*/
+		Piece emptyPiece;
+		emptyPiece.type = PIECE_EMPTY;
+		emptyPiece.owner = PLAYER_NONE;
+		emptyPiece.moveCount = 0;
+
+		board->board[area2->coor.x][area1->coor.y].piece = emptyPiece;
+	}
+
 	MakeMovement(area1, area2);
 
 	if (area2->piece.type == PIECE_KING && GetCoorDistance(&(area1->coor), &(area2->coor)) > 0)
@@ -725,18 +742,10 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 	else if (area2->piece.type == PIECE_PAWN)
 	// Piyonun son kareye ulasmasý
 	{
-		if (
-			(area2->piece.owner == PLAYER_1 && coor2->y == GRID_SIZE-1)
-			||
-			(area2->piece.owner == PLAYER_2 && coor2->y == 0)
-		)
+		if ((area2->piece.owner == PLAYER_1 && coor2->y == GRID_SIZE-1) || (area2->piece.owner == PLAYER_2 && coor2->y == 0))
 		{
-			area2->piece.type == PIECE_QUEEN;
+			area2->piece.type = PIECE_QUEEN;
 		}
-		/*else if ()
-		{
-
-		}*/
 	}
 	
 }
