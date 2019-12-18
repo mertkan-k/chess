@@ -399,10 +399,10 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 		case PIECE_BISHOP:
 		{
 			Coor tempCoor;
-			tempCoor.x = area->coor.x;
-			tempCoor.y = area->coor.y;
 
 			{ // Move right up
+				tempCoor.x = area->coor.x;
+				tempCoor.y = area->coor.y;
 				for (int i=0; i<GetMaxMoveLen(board, &(area->coor), MOVE_RU); i++)
 				{
 					tempCoor.x += 1;
@@ -417,6 +417,8 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				}
 			}
 			{ // Move left up
+				tempCoor.x = area->coor.x;
+				tempCoor.y = area->coor.y;
 				for (int i=0; i<GetMaxMoveLen(board, &(area->coor), MOVE_LU); i++)
 				{
 					tempCoor.x -= 1;
@@ -431,6 +433,8 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				}
 			}
 			{ // Move right down
+				tempCoor.x = area->coor.x;
+				tempCoor.y = area->coor.y;
 				for (int i=0; i<GetMaxMoveLen(board, &(area->coor), MOVE_RD); i++)
 				{
 					tempCoor.x += 1;
@@ -445,6 +449,8 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				}
 			}
 			{ // Move left down
+				tempCoor.x = area->coor.x;
+				tempCoor.y = area->coor.y;
 				for (int i=0; i<GetMaxMoveLen(board, &(area->coor), MOVE_LD); i++)
 				{
 					tempCoor.x -= 1;
