@@ -75,7 +75,7 @@ void PrintBoard(Board* board)
 			GetPieceName(&((&tempArea)->piece), name);
 			printf("(%c%c) ", name[0], name[1]);
 		}
-		printf("\n\n\n");
+		printf("\n\n");
 	}
 	printf("\n	(%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)  (%c)\n\n\n\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
 }

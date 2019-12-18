@@ -36,8 +36,5 @@
 ehthumbs.db
 Thumbs.db
 
-
-#
-*.txt
-project/forDeveloper
-project/bin
+project/forDeveloper/*
+project/bin/*
