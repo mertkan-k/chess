@@ -266,6 +266,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 								AddNood(list, tempCoor);
 						}
 						else if(!IsMyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
+						// En passant:
 						{
 							Coor nearCoor;
 							nearCoor.x = tempCoor.x;
@@ -699,7 +700,7 @@ void MakeMovementBoard(Board* board, Coor* coor1, Coor* coor2)
 		players.lastMove[(area1->piece.owner)-1] = *coor2;
 	}
 
-	if (area2->piece.type == PIECE_EMPTY && area1->coor.x != area2->coor.x)
+	if (area1->piece.type == PIECE_PAWN && area2->piece.type == PIECE_EMPTY && area1->coor.x != area2->coor.x)
 	/**
 	 * En passant:
 	 * eger gidecegi yer bossa ve x degeri kendi x ine esit degilse:
