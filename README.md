@@ -32,3 +32,8 @@ A little chess game with C
         2: Taşın bulunduğu koordinatın y değeri
         3: Taşın tipi (enum PieceTypes)
         4: Taşın sahibi olan oyuncu (enum PlayerTypes)
+
+
+Ekran Goruntuleri:
+https://www.imagevisit.com/images/2019/12/19/Screenshot_1.png
+https://www.imagevisit.com/images/2019/12/19/Screenshot_2.png
