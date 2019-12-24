@@ -481,7 +481,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 			tempCoor.x = area->coor.x+1; tempCoor.y = area->coor.y-2; allCoors[6] = tempCoor;
 			tempCoor.x = area->coor.x+2; tempCoor.y = area->coor.y-1; allCoors[7] = tempCoor;
 
-			for (size_t i = 0; i < sizeof(allCoors)/sizeof(allCoors[0]); i++)
+			FOR_ARRAY(allCoors)
 			{
 				tempCoor = allCoors[i];
 				if (IsReelCoor(&tempCoor) && !IsMyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
@@ -513,7 +513,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 				tempCoor.x = area->coor.x; tempCoor.y = area->coor.y-1; allCoors[6] = tempCoor;
 				tempCoor.x = area->coor.x+1; tempCoor.y = area->coor.y-1; allCoors[7] = tempCoor;
 
-				for (size_t i = 0; i < sizeof(allCoors)/sizeof(allCoors[0]); i++)
+				FOR_ARRAY(allCoors)
 				{
 					tempCoor = allCoors[i];
 					if (IsReelCoor(&tempCoor) && !IsMyArea(area->piece.owner, &(board->board[tempCoor.x][tempCoor.y])))
@@ -560,7 +560,7 @@ void GetMovementList(Board* board, Area* area, CoorNood* list, bool withControl,
 						break;
 				}
 
-				for (size_t i = 0; i < (sizeof(allCoors)/sizeof(Coor)); i++)
+				FOR_ARRAY(allCoors)
 				{
 					tempCoor = allCoors[i];
 					Area* tempArea = CoorToArea(board, &tempCoor);
